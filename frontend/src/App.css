@@ -46,7 +46,8 @@ body{
   background-color: pink; 
   color: #000; 
   border: 1px solid black;
-
+  transition:0.5s;
+  border-radius: 5px;
 }
 
 
