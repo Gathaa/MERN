@@ -1,14 +1,17 @@
 const express = require("express")
-const Collection = require('./Mongo')
+const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+const userModel = require('./Users')
 
-/*app.get("/Login",cors(),(req,res)=>{
+mongoose.connect("mongodb://localhost:27017/Orange")
+const port = 8000
+app.listen(port, () => {
+    console.log(`Server Is Running On Port ${port} !`);
 })
-*/
 
 app.post("/Login", async (req, res) => {
     const { Email, Password } = req.body
@@ -26,35 +29,10 @@ app.post("/Login", async (req, res) => {
         res.json("Error Occured With The Server !")
     }
 })
-app.post("/Register",async(req,res)=>{
-    const{Fname,Lname,Email,Password}=req.body
-
-    const data={
-        Fname:Fname,
-        Lname:Lname,
-        Email:Email,
-        Password:Password, 
-    }
-
-    try{
-        const check=await Collection.findOne({Email:Email})
-
-        if(check){
-            res.json("Email Already Exists !! Sowwwy :(")
-        }
-        else{
-            res.json("Email Registered Successfully !!! Enjoy :)")
-            await Collection.insertMany([data])
-        }
-    }
-    catch(e){
-        res.json("Error Occured With The Server !")
-    }
-
+app.post("/Register", async (req, res) => {
+    userModel.create(req.body)
+    .then(Users => res.json(Users))
+    .catch(err => res.json(err))
 })
 
 
-const port = 8000
-app.listen(port,()=>{
-    console.log(`Server Is Running On Port ${port} !`);
-})

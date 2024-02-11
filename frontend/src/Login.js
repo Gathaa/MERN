@@ -2,8 +2,12 @@ import './App.css';
 import { useState } from 'react';
 import axios from "axios";
 import {useNavigate,Link} from "react-router-dom";
-function Login () {
-  const [Email,SetEmail] = useState('');
+import React from 'react';
+
+
+/*
+
+const [Email,SetEmail] = useState('');
   const [Password,SetPassword]=useState('');
 
   async function submit(e){
@@ -34,9 +38,7 @@ function Login () {
     }
 
 }
-  return (
-    <div className="log">
-    <div className='tab'>
+<div className='tab'>
     <img className='logo' src={require('./orange.png')} alt='Orangelogo' />
     </div>
     <form action='POST'>
@@ -49,6 +51,12 @@ function Login () {
         <br></br>
 
         <p>You Do Not Have An Account !!!</p>
+*/ 
+function Login () {
+  
+  return (
+    <div className="log">
+        <p>Hello World </p>
 
     </div>
     
